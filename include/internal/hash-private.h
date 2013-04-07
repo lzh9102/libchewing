@@ -33,6 +33,7 @@ typedef struct tag_HASH_ITEM {
 HASH_ITEM *HashFindPhone( const uint16_t phoneSeq[] );
 HASH_ITEM *HashFindEntry( struct tag_ChewingData *pgdata, const uint16_t phoneSeq[], const char wordSeq[] );
 HASH_ITEM *HashInsert( struct tag_ChewingData *pgdata, UserPhraseData *pData );
+void HashRemove( struct tag_ChewingData *pgdata, const uint16_t phoneSeq[], const char wordSeq[] );
 HASH_ITEM *HashFindPhonePhrase( struct tag_ChewingData *pgdata, const uint16_t phoneSeq[], HASH_ITEM *pHashLast );
 void HashModify( struct tag_ChewingData *pgdata, HASH_ITEM *pItem );
 int AlcUserPhraseSeq( UserPhraseData *pData, int phonelen, int wordlen );

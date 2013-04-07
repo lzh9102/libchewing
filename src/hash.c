@@ -514,6 +514,35 @@ static void FreeHashItem( HASH_ITEM *aItem )
 	}
 }
 
+void HashRemove( ChewingData *pgdata, const uint16_t phoneSeq[], const char wordSeq[] )
+{
+	int hashvalue;
+	HASH_ITEM *pTempItem, *pItem, *pPrevItem;
+
+	hashvalue = HashFunc( phoneSeq );
+	pPrevItem = 0;
+	pItem = pgdata->static_data.hashtable[ hashvalue ];
+	while ( pItem ) {
+		if ( 
+			! strcmp( pItem->data.wordSeq, wordSeq ) && 
+			PhoneSeqTheSame( pItem->data.phoneSeq, phoneSeq ) ) {
+			if ( pPrevItem ) {
+				pPrevItem->next = pItem->next;
+				FreeHashItem(pItem);
+				pItem = pPrevItem->next;
+			} else {
+				pTempItem = pItem->next;
+				pgdata->static_data.hashtable[ hashvalue ] = pTempItem;
+				FreeHashItem( pItem );
+				pItem = pTempItem;
+			}
+		} else {
+			pPrevItem = pItem;
+			pItem = pItem->next;
+		}
+	}
+}
+
 void TerminateHash( ChewingData *pgdata )
 {
 	HASH_ITEM *pItem;
