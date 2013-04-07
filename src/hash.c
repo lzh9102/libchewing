@@ -526,6 +526,7 @@ void HashRemove( ChewingData *pgdata, const uint16_t phoneSeq[], const char word
 		if ( 
 			! strcmp( pItem->data.wordSeq, wordSeq ) && 
 			PhoneSeqTheSame( pItem->data.phoneSeq, phoneSeq ) ) {
+			/* remove item from singly linked list */
 			if ( pPrevItem ) {
 				pPrevItem->next = pItem->next;
 				FreeHashItem(pItem);

@@ -1288,8 +1288,11 @@ CHEWING_API int chewing_handle_CtrlNum( ChewingContext *ctx, int key )
 
 	CheckAndResetRange( pgdata );
 
-	if ( pgdata->bSelect )
+	if ( pgdata->bSelect ) {
+		i = (key == '0') ? 9 : key - '1';
+		ChoiceRemove( pgdata, i );
 		return 0;
+	}
 
 	CallPhrasing( pgdata );
 	newPhraseLen = key - '0';

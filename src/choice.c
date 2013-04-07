@@ -444,3 +444,17 @@ int ChoiceSelect( ChewingData *pgdata, int selectNo )
 	return 0;
 }
 
+int ChoiceRemove( ChewingData *pgdata, int selectNo )
+{
+	uint16_t userPhoneSeq[ MAX_PHONE_SEQ_LEN ];
+	int len;
+
+	len = ueStrLen( pgdata->choiceInfo.totalChoiceStr[ selectNo ] ); 
+	memcpy(
+		userPhoneSeq, 
+		&( pgdata->phoneSeq[ PhoneSeqCursor( pgdata ) ] ), 
+		len * sizeof( uint16_t ) );
+	UserRemovePhrase( pgdata, userPhoneSeq, pgdata->choiceInfo.totalChoiceStr[ selectNo ] );
+	ChoiceEndChoice( pgdata );
+	return 0;
+}

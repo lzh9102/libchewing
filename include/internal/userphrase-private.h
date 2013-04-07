@@ -81,6 +81,6 @@ UserPhraseData *UserGetPhraseNext( struct tag_ChewingData *pgdata, const uint16_
  * @param phoneSeq[] Phone sequence
  * @param wordSeq[] Phrase against the phone sequence
  */
-void UserRemovePhrase( ChewingData *pgdata, const uint16_t phoneSeq[], const char wordSeq[] );
+void UserRemovePhrase( struct tag_ChewingData *pgdata, const uint16_t phoneSeq[], const char wordSeq[] );
 
 #endif
